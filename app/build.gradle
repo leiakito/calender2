@@ -1,0 +1,131 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.stu.calender2'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.stu.calender2"
+        minSdk 22
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // 添加资源合并和缩小优化
+        resConfigs "zh-rCN"  // 仅保留中文资源
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // 额外优化选项
+            crunchPngs true
+            zipAlignEnabled true
+        }
+        debug {
+            // 开发时启用优化但不混淆，提高构建速度
+            minifyEnabled false
+            shrinkResources false
+            crunchPngs false
+        }
+    }
+    
+    // 启用R8完全模式
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+    
+    // 启用优化编译
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = true
+        jumboMode = true
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        // 增加编译优化
+        incremental true
+    }
+
+    lint {
+        baseline = file("lint-baseline.xml")
+        checkDependencies true
+        abortOnError false
+        disable 'MissingTranslation', 'ExtraTranslation'
+    }
+    
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
+    }
+    
+    // 为水墨屏应用特殊配置
+    aaptOptions {
+        cruncherEnabled = false  // 减少PNG优化，加快构建
+        noCompress "webp"        // 不压缩已经压缩的资源
+    }
+    
+    // 优化打包，减少DEX文件大小
+    packagingOptions {
+        resources {
+            excludes += [
+                'META-INF/DEPENDENCIES',
+                'META-INF/LICENSE',
+                'META-INF/LICENSE.txt',
+                'META-INF/license.txt',
+                'META-INF/NOTICE',
+                'META-INF/NOTICE.txt',
+                'META-INF/notice.txt',
+                'META-INF/ASL2.0',
+                'META-INF/*.kotlin_module'
+            ]
+        }
+    }
+}
+
+dependencies {
+    // 使用implementation替代api依赖，减少编译时间
+    implementation libs.core.animation
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    implementation libs.appcompat
+    
+    // Material组件库
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+
+    // Room数据库 - 性能优化
+    implementation libs.room.runtime
+    annotationProcessor libs.room.compiler
+
+    // Navigation组件 - 使用特定版本避免兼容性问题
+    implementation 'androidx.navigation:navigation-fragment:2.7.7'
+    implementation 'androidx.navigation:navigation-ui:2.7.7'
+
+    // Lifecycle组件 - 减少不必要的处理
+    implementation libs.lifecycle.viewmodel
+    implementation libs.lifecycle.livedata
+    
+    // 基础库
+    implementation 'androidx.core:core-ktx:1.7.0'
+    
+    // 测试库 - 仅在测试配置中使用
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}

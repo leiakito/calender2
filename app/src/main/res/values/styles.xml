@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 此文件中移除所有重复的主题定义 -->
+    
+    <!-- 水墨屏日历样式 -->
+    <style name="EInkCalendarViewStyle" parent="android:Widget.CalendarView">
+        <item name="android:focusedMonthDateColor">@color/colorPrimary</item>
+        <item name="android:weekDayTextAppearance">@style/CalendarWeekDayTextAppearance</item>
+        <item name="android:dateTextAppearance">@style/CalendarDateTextAppearance</item>
+        <item name="android:headerMonthTextAppearance">@style/CalendarHeaderTextAppearance</item>
+    </style>
+
+    <!-- 日期文本样式 -->
+    <style name="CalendarDateTextAppearance" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- 周几文本样式 -->
+    <style name="CalendarWeekDayTextAppearance" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- 月份标题文本样式 -->
+    <style name="CalendarHeaderTextAppearance" parent="android:TextAppearance.Medium">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

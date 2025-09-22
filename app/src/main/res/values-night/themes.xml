@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Calender2" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- 自定义暗色主题 -->
+        <item name="colorPrimary">#64B5F6</item>            <!-- 亮蓝色 -->
+        <item name="colorPrimaryDark">#1976D2</item>        <!-- 深蓝色 -->
+        <item name="colorAccent">#4FC3F7</item>             <!-- 浅蓝色 -->
+        <item name="android:colorBackground">#0D2A3C</item>  <!-- 深蓝灰背景 -->
+        
+        <!-- 文字颜色 -->
+        <item name="android:textColor">#E1F5FE</item>       <!-- 超浅蓝色文字 -->
+        <item name="android:textColorPrimary">#B3E5FC</item><!-- 浅蓝色文字 -->
+        <item name="android:textColorSecondary">#81D4FA</item><!-- 中等蓝色文字 -->
+        
+        <!-- 减少阴影和渐变 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">#0D2A3C</item> <!-- 深蓝灰背景 -->
+    </style>
+</resources>

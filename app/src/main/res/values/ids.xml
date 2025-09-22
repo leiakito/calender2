@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fab_add_event" type="id" />
+    <item name="three_day_scrollview" type="id" />
+    <item name="week_scrollview" type="id" />
+    <item name="three_day_content" type="id" />
+    <item name="week_content" type="id" />
+    <item name="month_content" type="id" />
+</resources> 

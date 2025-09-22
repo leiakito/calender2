@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layerType="software"
+    android:animateLayoutChanges="false">
+
+    <!-- 星期标题行 -->
+    <LinearLayout
+        android:id="@+id/week_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="8dp">
+
+        <!-- 时间列标题 -->
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="时间"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 星期日 -->
+        <TextView
+            android:id="@+id/text_week_sun"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 分割线 - 使用细线 -->
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+
+        <!-- 星期一 -->
+        <TextView
+            android:id="@+id/text_week_mon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="一"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 分割线 - 使用细线 -->
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+
+        <!-- 星期二 -->
+        <TextView
+            android:id="@+id/text_week_tue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="二"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 分割线 - 使用细线 -->
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+
+        <!-- 星期三 -->
+        <TextView
+            android:id="@+id/text_week_wed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="三"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 分割线 - 使用细线 -->
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+
+        <!-- 星期四 -->
+        <TextView
+            android:id="@+id/text_week_thu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="四"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 分割线 - 使用细线 -->
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+
+        <!-- 星期五 -->
+        <TextView
+            android:id="@+id/text_week_fri"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="五"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <!-- 分割线 - 使用细线 -->
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+
+        <!-- 星期六 -->
+        <TextView
+            android:id="@+id/text_week_sat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="六"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 内容区域 -->
+    <ScrollView
+        android:id="@+id/week_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false">
+
+        <!-- 时间行容器 -->
+        <LinearLayout
+            android:id="@+id/time_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <!-- 时间行将由代码动态生成 -->
+            
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout> 

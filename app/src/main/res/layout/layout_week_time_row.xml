@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 时间行模板，包含一个时间标签和7个日期单元格 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:layerType="none">
+
+    <!-- 时间标签 -->
+    <TextView
+        android:id="@+id/time_label"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="00:00"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="#F5F5F5" />
+
+    <!-- 日期单元格容器 -->
+    <LinearLayout
+        android:id="@+id/cells_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layerType="none"
+        android:baselineAligned="false">
+
+        <!-- 每个FrameLayout单元格将在代码中动态生成，并为每个单元格设置唯一标识 -->
+
+    </LinearLayout>
+</LinearLayout> 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <CheckBox
+            android:id="@+id/check_task_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_task_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="任务标题"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/check_task_completed"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_task_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="2023-06-15 14:00 - 2023-06-15 15:00"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/text_task_title"
+            app:layout_constraintStart_toStartOf="@+id/text_task_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_task_title" />
+
+        <TextView
+            android:id="@+id/text_task_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="4dp"
+            android:text="会议室B"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/text_task_importance"
+            app:layout_constraintStart_toStartOf="@+id/text_task_time"
+            app:layout_constraintTop_toBottomOf="@+id/text_task_time" />
+
+        <TextView
+            android:id="@+id/text_task_importance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重要且紧急"
+            android:textColor="@color/colorQuadrant1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/text_task_location"
+            app:layout_constraintEnd_toEndOf="@+id/text_task_time"
+            app:layout_constraintTop_toTopOf="@+id/text_task_location" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView> 

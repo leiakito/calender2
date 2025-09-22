@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 三天的单元格和分割线 -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 第一天单元格 -->
+    <FrameLayout
+        android:id="@+id/cell_day1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp"
+        android:tag="day1">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 第二天单元格 -->
+    <FrameLayout
+        android:id="@+id/cell_day2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp"
+        android:tag="day2">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 第三天单元格 -->
+    <FrameLayout
+        android:id="@+id/cell_day3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp"
+        android:tag="day3">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+</merge> 

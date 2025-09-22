@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/calendarFragment">
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.stu.calender2.CalendarFragment"
+        android:label="日历"
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/action_calendarFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment"
+            app:enterAnim="@null"
+            app:exitAnim="@null"
+            app:popEnterAnim="@null"
+            app:popExitAnim="@null"
+            app:popUpTo="@id/calendarFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:name="com.stu.calender2.TasksFragment"
+        android:label="任务"
+        tools:layout="@layout/fragment_tasks">
+        <action
+            android:id="@+id/action_tasks_to_task_detail"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.stu.calender2.TaskDetailFragment"
+        android:label="任务详情"
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="taskId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+</navigation> 

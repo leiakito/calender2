@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 七天的单元格和分割线 -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 星期日单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 星期一单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 星期二单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 星期三单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 星期四单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 星期五单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC" />
+
+    <!-- 星期六单元格 -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="2dp">
+        <!-- 这里可以添加事件内容 -->
+    </FrameLayout>
+</merge> 

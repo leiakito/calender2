@@ -1,0 +1,4 @@
+<resources>
+    <!-- 添加您的尺寸资源 -->
+    <dimen name="your_dimension_name">16dp</dimen>
+</resources> 

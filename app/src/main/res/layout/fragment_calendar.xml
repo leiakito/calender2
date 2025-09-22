@@ -1,0 +1,1845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:animateLayoutChanges="false"
+    android:layerType="software"
+    android:hardwareAccelerated="false"
+    android:overScrollMode="never"
+    android:fadeScrollbars="false">
+
+    <!-- 顶部标题和切换按钮 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日历"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 切换按钮容器 -->
+        <LinearLayout
+            android:id="@+id/view_mode_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_calendar"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 三日按钮 -->
+            <Button
+                android:id="@+id/btn_three_day"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
+                android:text="三日"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <!-- 周按钮 -->
+            <Button
+                android:id="@+id/btn_week"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
+                android:text="周"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <!-- 月按钮 -->
+            <Button
+                android:id="@+id/btn_month"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:background="@color/colorAccent"
+                android:text="月"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 日历视图容器 -->
+    <FrameLayout
+        android:id="@+id/calendar_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_header">
+
+        <!-- 三日视图 -->
+        <LinearLayout
+            android:id="@+id/three_day_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- 三日视图的日期标题行 -->
+            <LinearLayout
+                android:id="@+id/three_day_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:padding="8dp">
+
+                <!-- 时间列标题 -->
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="时间"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 第一天日期 -->
+                <TextView
+                    android:id="@+id/text_day_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="6月1日"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 第二天日期 -->
+                <TextView
+                    android:id="@+id/text_day_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="6月2日"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 第三天日期 -->
+                <TextView
+                    android:id="@+id/text_day_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="6月3日"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 三日视图的内容区域 -->
+            <ScrollView
+                android:id="@+id/three_day_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/three_day_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 时间段行（0点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="00:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（1点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="01:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（2点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="02:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（3点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="03:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（4点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="04:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（5点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="05:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（6点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="06:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（7点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="07:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 以下是已有的时间段行（8点开始） -->
+
+                    <!-- 时间段行（上午8点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <!-- 时间列 -->
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="08:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 第一天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day1_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第二天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day2_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第三天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day3_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（上午9点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <!-- 时间列 -->
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="09:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 第一天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day1_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第二天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day2_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第三天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day3_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（上午10点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <!-- 时间列 -->
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="10:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 第一天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day1_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 示例事件 -->
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorAccent"
+                                android:padding="4dp"
+                                android:text="会议"
+                                android:textColor="@color/white" />
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第二天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day2_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第三天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_day3_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（上午11点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="11:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（中午12点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="12:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午13点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="13:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午14点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="14:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午15点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="15:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午16点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="16:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午17点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="17:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上18点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="18:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上19点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="19:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上20点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="20:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上21点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="21:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上22点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="22:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上23点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="23:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（凌晨24点/0点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="24:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- 周视图 -->
+        <LinearLayout
+            android:id="@+id/week_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- 周视图的日期标题行 -->
+            <LinearLayout
+                android:id="@+id/week_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:padding="8dp">
+
+                <!-- 时间列标题 -->
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="时间"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 星期日 -->
+                <TextView
+                    android:id="@+id/text_week_sun"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="日"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 星期一 -->
+                <TextView
+                    android:id="@+id/text_week_mon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="一"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 星期二 -->
+                <TextView
+                    android:id="@+id/text_week_tue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="二"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 星期三 -->
+                <TextView
+                    android:id="@+id/text_week_wed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="三"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 星期四 -->
+                <TextView
+                    android:id="@+id/text_week_thu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="四"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 星期五 -->
+                <TextView
+                    android:id="@+id/text_week_fri"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="五"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <!-- 分割线 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- 星期六 -->
+                <TextView
+                    android:id="@+id/text_week_sat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="六"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 周视图的内容区域 -->
+            <ScrollView
+                android:id="@+id/day_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/week_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 时间段行（0点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="00:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（1点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="01:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（2点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="02:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（3点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="03:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（4点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="04:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（5点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="05:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（6点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="06:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（7点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="07:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 七天的单元格和分割线 -->
+                        <include layout="@layout/week_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 以下是已有的时间段行（8点开始） -->
+
+                    <!-- 时间段行（上午8点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <!-- 时间列 -->
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="08:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 第一天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_sun_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第二天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_mon_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第三天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_tue_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（上午9点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <!-- 时间列 -->
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="09:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 第一天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_sun_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第二天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_mon_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第三天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_tue_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（上午10点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <!-- 时间列 -->
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="10:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 第一天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_sun_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 示例事件 -->
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorAccent"
+                                android:padding="4dp"
+                                android:text="会议"
+                                android:textColor="@color/white" />
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第二天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_mon_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+
+                        <!-- 分割线 -->
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC" />
+
+                        <!-- 第三天单元格 -->
+                        <FrameLayout
+                            android:id="@+id/cell_week_tue_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="2dp">
+                            <!-- 这里可以添加事件内容 -->
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（上午11点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="11:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（中午12点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="12:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午13点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="13:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午14点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="14:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午15点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="15:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午16点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="16:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（下午17点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="17:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上18点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="18:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上19点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="19:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上20点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="20:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上21点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="21:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上22点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="22:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（晚上23点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="23:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+
+                    <!-- 水平分割线 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC" />
+
+                    <!-- 时间段行（凌晨24点/0点） -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="24:00"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:background="#F0F0F0" />
+
+                        <!-- 三天的单元格和分割线 -->
+                        <include layout="@layout/three_day_cells" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- 月视图 -->
+        <LinearLayout
+            android:id="@+id/month_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <!-- 使用自定义样式的CalendarView -->
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:theme="@style/EInkCalendarViewStyle"
+                android:dateTextAppearance="@style/CalendarDateTextAppearance"
+                android:weekDayTextAppearance="@style/CalendarWeekDayTextAppearance"
+                android:background="@color/white"
+                android:focusedMonthDateColor="@color/colorPrimary"
+                android:selectedDateVerticalBar="@color/colorPrimary"
+                android:selectedWeekBackgroundColor="@color/colorPrimary"
+                android:unfocusedMonthDateColor="@color/colorPrimaryDark"
+                android:weekNumberColor="@color/colorPrimary"
+                android:weekSeparatorLineColor="@color/colorPrimary"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"
+                android:fadingEdge="none" />
+            
+            <!-- 月视图内容区域 -->
+            <LinearLayout
+                android:id="@+id/month_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 月视图内容将在这里动态填充 -->
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 
